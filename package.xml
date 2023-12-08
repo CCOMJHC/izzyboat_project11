@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>izzyboat_project11</name>
+  <version>0.0.0</version>
+  <description>
+    Launch files and configuration for UNH-CCOM's Seafloor Systems EchoBoat 160 ASV.
+  </description>
+
+  <author email="roland@ccom.unh.edu">Roland Arsenault</author>
+  <maintainer email="roland@ccom.unh.edu">Roland Arsenault</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>project11</exec_depend>
+  <exec_depend>mavros</exec_depend>
+</package>
