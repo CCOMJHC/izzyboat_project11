@@ -1,0 +1,17 @@
+<launch>
+  <arg name="namespace" default="izzy"/>
+  <arg name="image_transport" default="raw"/>
+
+  <group ns="$(arg namespace)/sensors/cameras/forward">
+
+    <node pkg="opencv_dnn" type="opencv_dnn_node" name="yolov8">
+      <param name="model" value="$(find opencv_dnn)/config/yolov8l.onnx"/>
+      <remap from="image" to="forward_camera/image_raw"/>
+      <remap from="image/compressed" to="forward_camera/image_raw/compressed"/>
+      <param name="image_transport" value="$(arg image_transport)"/>
+    </node>
+
+  </group>
+
+
+</launch>
