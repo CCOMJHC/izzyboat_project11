@@ -4,6 +4,7 @@
   <arg name="platform_package" default="izzyboat_project11"/>
   <arg name="operator_host" default="salmonib"/>
   <arg name="logDirectory" default="/dev/null"/>
+  <arg name="urdf_model" default="$(find izzyboat_project11)/urdf/izzyboat.urdf"/>
 
   <include file="$(find echoboat_project11)/launch/echo.launch">
     <arg name="namespace" value="$(arg namespace)"/>
@@ -14,15 +15,19 @@
 
   <group ns="$(arg namespace)">
 
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
     <node pkg="usb_cam" type="usb_cam_node" name="forward_camera" ns="sensors/cameras/forward"> 
       <param name="camera_name" value="camera_forward" />
-      <param name="framerate" value="10" />
+      <param name="framerate" value="5" />
       <param name="camera_frame_id" type="string" value="$(arg namespace)/camera_forward" />
       <param name="camera_info_url" value="file://$(find izzyboat_project11)/config/camera_forward.yaml"/>
     </node>
 
     <node pkg="rosbag" type="record" name="logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat --split --duration=15m --repeat-latched --lz4 -a -x  &quot;(.*)image(.*)|(.*)lidar(.*)&quot;
 "  />
+  
+    <param name="robot_description" command="$(find xacro)/xacro $(arg urdf_model) namespace:=$(arg namespace)"/>
 
   </group>
 
