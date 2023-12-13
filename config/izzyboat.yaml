@@ -1,0 +1,5 @@
+s57_grids:
+  map_frame: izzy/map
+
+  robot:
+    frame_id: izzy/base_link

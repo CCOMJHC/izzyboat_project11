@@ -25,7 +25,10 @@
     </node>
 
     <node pkg="rosbag" type="record" name="logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat --split --duration=15m --repeat-latched --lz4 -a -x  &quot;(.*)image(.*)|(.*)lidar(.*)&quot;
-"  />
+"   />
+
+    <rosparam command="load" file="$(find izzyboat_project11)/config/izzyboat.yaml"/>
+
   
     <param name="robot_description" command="$(find xacro)/xacro $(arg urdf_model) namespace:=$(arg namespace)"/>
 
