@@ -1,12 +1,44 @@
 <?xml version="1.0"?>
 <robot name="izzyboat">
+
+
+  <material name="hull">
+    <color rgba="1.0 1.0 0.0 1.0"/>
+  </material>
+
+  <!-- The following is for VSCode urdf preview to work -->
+  <!-- <link name="base_link"/>
+  <joint name="base_to_izzy" type="fixed">
+    <parent link="base_link"/>
+    <child link="izzy/base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint> -->
+
   <link name="izzy/base_link">
-    <visual>
+    <visual name="frame">
       <geometry>
         <box size="1.77 0.07 0.035"/>
       </geometry>
       <origin xyz="0.86 0 -.0175"/>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
     </visual>
+    <visual name="hull">
+      <geometry>
+        <box size="1.3 0.8 0.3"/>
+      </geometry>
+      <origin xyz="0.65 0 -.5"/>
+      <material name="hull"/>
+    </visual>
+    <visual name="bow">
+      <geometry>
+        <box size="0.55 0.55 0.3"/>
+      </geometry>
+      <origin xyz="1.315 0 -.5" rpy="0 0 0.7854"/>
+      <material name="hull"/>
+    </visual>
+
   </link>
 
   <link name="izzy/camera_forward">
@@ -15,12 +47,35 @@
         <cylinder length="0.07" radius="0.05"/>
       </geometry>
       <origin rpy="0 1.57075 0" xyz="-0.015 0 0"/>
+      <material name="camera">
+        <color rgba="0.2 0.2 0.2 1.0"/>
+      </material>
     </visual>
   </link>
+
+  <link name="izzy/camera_forward_optical">
+     <visual>
+      <geometry>
+        <box size=".5 .3 .01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 1.5"/>
+      <material name="image_plane">
+        <color rgba="0.0 0.5 0.0 0.5"/>
+      </material>
+    </visual>
+  </link>
+
 
   <joint name="base_to_camera_forward" type="fixed">
     <parent link="izzy/base_link"/>
     <child link="izzy/camera_forward"/>
-    <origin xyz="1.8 0 -0.055"/>
+    <origin xyz="1.8 0 -0.055" rpy="0 0 0"/>
   </joint>
+
+  <joint name="camera_forward_to_camera_forward_optical" type="fixed">
+    <parent link="izzy/camera_forward"/>
+    <child link="izzy/camera_forward_optical"/>
+    <origin xyz="0 0 0" rpy="-1.57075 0 -1.57075"/>
+  </joint>
+
 </robot>
