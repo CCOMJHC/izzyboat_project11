@@ -1,14 +1,19 @@
 <launch>
   <arg name="namespace" default="izzy"/>
   <arg name="image_transport" default="raw"/>
+  <arg name="model" default="$(find opencv_dnn)/config/yolov8l.onnx"/>
+  <arg name="detections_parser" default="opencv_dnn::YOLOv8Parser"/>
+  <arg name="threshold" default="0.8"/>
 
   <group ns="$(arg namespace)/sensors/cameras/forward">
 
     <node pkg="opencv_dnn" type="opencv_dnn_node" name="yolov8">
-      <param name="model" value="$(find opencv_dnn)/config/yolov8l.onnx"/>
+      <param name="model" value="$(arg model)"/>
+      <param name="detections_parser" value="$(arg detections_parser)"/>
       <remap from="image" to="forward_camera/image_raw"/>
       <remap from="image/compressed" to="forward_camera/image_raw/compressed"/>
       <param name="image_transport" value="$(arg image_transport)"/>
+      <param name="threshold" value="$(arg threshold)"/>
     </node>
 
   </group>
