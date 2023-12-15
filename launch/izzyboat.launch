@@ -21,7 +21,7 @@
       <node pkg="usb_cam" type="usb_cam_node" name="camera_forward"> 
         <param name="camera_name" value="camera_forward" />
         <param name="framerate" value="5" />
-        <param name="camera_frame_id" type="string" value="$(arg namespace)/camera_forward" />
+        <param name="camera_frame_id" type="string" value="$(arg namespace)/camera_forward_optical" />
         <param name="camera_info_url" value="file://$(find izzyboat_project11)/config/camera_forward.yaml"/>
       </node>
 
