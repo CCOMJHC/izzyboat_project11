@@ -8,6 +8,12 @@ The top mounting bar is 177 cm long by 7 cm wide. Aft gps is about 2.5 cm from a
 
 Forward camera imaging reference point is approximately 5.5 cm forward of bar and 5.5 cm below bar.
 
+Aft trimble gps to aft cuav gps ~10" or ~.25m
+
+cuav gps aft to ref point (center of well cover) 0.203m
+
+
+
 # Dynamics estimate from looking at foxglove graphs
 
 1 m/s in about 1.5 s
