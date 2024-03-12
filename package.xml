@@ -15,4 +15,5 @@
   <exec_depend>project11</exec_depend>
   <exec_depend>mavros</exec_depend>
   <exec_depend>usb_cam</exec_depend>
+  <exec_depend>octomap</exec_depend>
 </package>
