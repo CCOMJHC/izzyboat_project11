@@ -35,10 +35,18 @@
 
       <node pkg="topic_tools" type="throttle" name="throttle_forward" args="messages camera_forward/image_raw/compressed .5"/>
 
-      <node pkg="topic_tools" type="throttle" name="throttle_oak" args="messages oak/rgb/image_raw/compressed .5"/>
 
       <include file="$(find depthai_ros_driver)/launch/pointcloud.launch">
       </include>
+
+      <node pkg="topic_tools" type="throttle" name="throttle_oak" args="messages oak/rgb/image_raw/compressed .5"/>
+
+      <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" ns="oak">
+        <remap from="cloud_in" to="points"/>
+        <param name="resolution" value="0.5"/>
+        <param name="frame_id" value="$(arg namespace)/map"/>
+      </node>
+
     </group>
 
 
