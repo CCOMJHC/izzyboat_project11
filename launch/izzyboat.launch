@@ -35,6 +35,7 @@
 
       <node pkg="topic_tools" type="throttle" name="throttle_forward" args="messages camera_forward/image_raw/compressed .5"/>
 
+      <node pkg="topic_tools" type="throttle" name="throttle_oak" args="messages oak/rgb/image_raw/compressed .5"/>
 
       <include file="$(find depthai_ros_driver)/launch/pointcloud.launch">
       </include>
@@ -45,7 +46,7 @@
     <node pkg="rosbag" type="record" name="logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat --split --duration=15m --repeat-latched --lz4 -a -x  &quot;(.*)image(.*)|(.*)lidar(.*)|(.*)points(.*)&quot;
 "   />
 
-    <node pkg="rosbag" type="record" name="video_logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat_video --split --duration=15m --repeat-latched --lz4 /izzy/sensors/cameras/camera_forward/camera_info /izzy/sensors/cameras/camera_forward/image_raw/compressed_throttle"   />
+    <node pkg="rosbag" type="record" name="video_logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat_video --split --duration=15m --repeat-latched --lz4 /izzy/sensors/cameras/camera_forward/camera_info /izzy/sensors/cameras/camera_forward/image_raw/compressed_throttle /izzy/sensors/cameras/oak/rgb/camera_info /izzy/sensors/cameras/oak/rgb/image_raw/compressed_throttle"   />
 
 
     <rosparam command="load" file="$(find izzyboat_project11)/config/izzyboat.yaml"/>
