@@ -50,6 +50,11 @@
 
     </group>
 
+  <node pkg="imu_to_tss" type="imu_to_tss.py" name="imu_to_tss">
+    <remap from="input" to="mavros/imu/data"/>
+    <param name="address" value="blaze"/>
+    <param name="port" value="4321"/>
+  </node> 
 
 
     <node pkg="rosbag" type="record" name="logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat --split --duration=15m --repeat-latched --lz4 -a -x  &quot;(.*)image(.*)|(.*)lidar(.*)|(.*)points(.*)&quot;
