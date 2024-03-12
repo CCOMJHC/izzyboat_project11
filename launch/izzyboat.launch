@@ -39,7 +39,7 @@
 
 
 
-    <node pkg="rosbag" type="record" name="logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat --split --duration=15m --repeat-latched --lz4 -a -x  &quot;(.*)image(.*)|(.*)lidar(.*)&quot;
+    <node pkg="rosbag" type="record" name="logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat --split --duration=15m --repeat-latched --lz4 -a -x  &quot;(.*)image(.*)|(.*)lidar(.*)|(.*)points(.*)&quot;
 "   />
 
     <node pkg="rosbag" type="record" name="video_logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat_video --split --duration=15m --repeat-latched --lz4 /izzy/sensors/cameras/camera_forward/camera_info /izzy/sensors/cameras/camera_forward/image_raw/compressed_throttle"   />
