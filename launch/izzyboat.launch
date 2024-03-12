@@ -18,7 +18,8 @@
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
     <group ns="sensors/cameras/">
-      <node pkg="usb_cam" type="usb_cam_node" name="camera_forward"> 
+
+      <!-- <node pkg="usb_cam" type="usb_cam_node" name="camera_forward"> 
         <param name="camera_name" value="camera_forward" />
         <param name="framerate" value="30" />
         <param name="image_width" value="1920"/>
@@ -33,7 +34,7 @@
         <remap from="image" to="camera_forward/image_raw"/>
       </node>
 
-      <node pkg="topic_tools" type="throttle" name="throttle_forward" args="messages camera_forward/image_raw/compressed .5"/>
+      <node pkg="topic_tools" type="throttle" name="throttle_forward" args="messages camera_forward/image_raw/compressed .5"/> -->
 
 
       <include file="$(find depthai_ros_driver)/launch/pointcloud.launch">
@@ -43,7 +44,7 @@
 
       <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" ns="oak">
         <remap from="cloud_in" to="points"/>
-        <param name="resolution" value="0.5"/>
+        <param name="resolution" value="0.1"/>
         <param name="frame_id" value="$(arg namespace)/map"/>
       </node>
 

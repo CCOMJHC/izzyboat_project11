@@ -7,12 +7,12 @@
   </material>
 
   <!-- The following is for VSCode urdf preview to work -->
-  <link name="base_link"/>
+  <!-- <link name="base_link"/>
   <joint name="base_to_izzy" type="fixed">
     <parent link="base_link"/>
     <child link="izzy/base_link"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
-  </joint>
+  </joint> -->
 
   <link name="izzy/base_link">
     <visual name="frame">
@@ -65,6 +65,12 @@
     </visual>
   </link>
 
+  <link name="izzy/sensors/cameras/oak_rgb_camera_optical_frame"/>
+  <joint name="forward_optical_to_oak_optical" type="fixed">
+    <parent link="izzy/camera_forward_optical"/>
+    <child link="izzy/sensors/cameras/oak_rgb_camera_optical_frame"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
 
   <joint name="base_to_camera_forward" type="fixed">
     <parent link="izzy/base_link"/>
