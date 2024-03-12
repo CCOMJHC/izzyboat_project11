@@ -35,6 +35,9 @@
 
       <node pkg="topic_tools" type="throttle" name="throttle_forward" args="messages camera_forward/image_raw/compressed .5"/>
 
+
+      <include file="$(find depthai_ros_driver)/launch/pointcloud.launch">
+      </include>
     </group>
 
 
