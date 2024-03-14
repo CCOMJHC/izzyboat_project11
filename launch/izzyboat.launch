@@ -50,11 +50,17 @@
 
     </group>
 
-  <node pkg="imu_to_tss" type="imu_to_tss.py" name="imu_to_tss">
-    <remap from="input" to="mavros/imu/data"/>
-    <param name="address" value="blaze"/>
-    <param name="port" value="4321"/>
-  </node> 
+    <node pkg="imu_to_tss" type="imu_to_tss.py" name="imu_to_tss">
+      <remap from="input" to="mavros/imu/data"/>
+      <param name="address" value="blaze"/>
+      <param name="port" value="4321"/>
+    </node> 
+
+    <group ns="mavros/global_position">
+      <node pkg="marine_tools" type="navsatfix_to_nmea" name="navsatfix_to_nmea">
+        <remap from="input" to="raw/fix"/>
+      </node>
+    </group>
 
 
     <node pkg="rosbag" type="record" name="logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat --split --duration=15m --repeat-latched --lz4 -a -x  &quot;(.*)image(.*)|(.*)lidar(.*)|(.*)points(.*)&quot;
