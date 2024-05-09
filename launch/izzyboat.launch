@@ -78,6 +78,19 @@
       </node>
     </group>
 
+    <group ns="sensors/deltat">
+      <node pkg="imagenex_deltat" type="deltat.py" name="deltat">
+        <param name="frame_id" value="$(arg platform_name)/deltat"/>
+      </node>
+
+      <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+        <remap from="cloud_in" to="soundings"/>
+        <param name="resolution" value="0.25"/>
+        <param name="frame_id" value="$(arg namespace)/map"/>
+      </node>
+    </group>
+
+
     <node pkg="rosbag" type="record" name="logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat --split --duration=15m --repeat-latched --lz4 -a -x  &quot;(.*)image(.*)|(.*)lidar(.*)|(.*)points(.*)&quot;
 "   />
 
