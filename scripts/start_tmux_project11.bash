@@ -39,6 +39,6 @@ sleep 5
 /usr/bin/tmux new -d -s roscore roscore
 
 /usr/bin/tmux new -d -s project11 
-/usr/bin/tmux send-keys "rosrun rosmon rosmon --name=rosmon_izzyboat izzyboat_project11 izzyboat.launch logDirectory:=${LOGDIR} operator_host:=salmonib" C-m
+/usr/bin/tmux send-keys "rosrun rosmon rosmon --name=rosmon_izzyboat izzyboat_project11 izzyboat.launch logDirectory:=${LOGDIR} operator_host:=salmonib fcu_url:=/dev/ttyACM0:115200" C-m
 
 } >> "${LOG_FILE}" 2>&1

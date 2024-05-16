@@ -3,3 +3,17 @@ s57_grids:
 
   robot:
     frame_id: izzy/base_link
+
+udp_bridge/remotes:
+  operator:
+    connections:
+      default:
+        topics:
+          oak_rgb: {source: sensors/cameras/oak/rgb/image_raw/compressed, period: 0.25}
+          oak_rgb_info: {source: sensors/cameras/oak/rgb/camera_info}
+          deltat: {source: sensors/deltat/soundings}
+          deltat_octomap: {source: /izzy/sensors/deltat/occupied_cells_vis_array}
+          battery: {source: /izzy/mavros/battery}
+          control_cmd_vel: {source: /izzy/project11/control/cmd_vel}
+          cross_track_error: {source: /izzy/navigator/cross_track_error}
+          crab_angle: {source: /izzy/navigator/crab_angle}

@@ -5,17 +5,21 @@
   <arg name="operator_host" default="salmonib"/>
   <arg name="logDirectory" default="/dev/null"/>
   <arg name="urdf_model" default="$(find izzyboat_project11)/urdf/izzyboat.urdf"/>
+  <arg name="fcu_url" default="/dev/ttyUSB0:57600"/> 
 
   <include file="$(find echoboat_project11)/launch/echo.launch">
     <arg name="namespace" value="$(arg namespace)"/>
     <arg name="platform_name" value="$(arg platform_name)"/>
     <arg name="platform_package" value="$(arg platform_package)"/>
     <arg name="operator_host" value="$(arg operator_host)"/>
+    <arg name="fcu_url" value="$(arg fcu_url)"/>
   </include> 
 
   <group ns="$(arg namespace)">
 
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+      <param name="use_tf_static" value="false"/>
+    </node>
 
     <group ns="sensors/cameras/">
 
@@ -42,11 +46,11 @@
 
       <node pkg="topic_tools" type="throttle" name="throttle_oak" args="messages oak/rgb/image_raw/compressed .5"/>
 
-      <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" ns="oak">
+      <!-- <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" ns="oak">
         <remap from="cloud_in" to="points"/>
         <param name="resolution" value="0.1"/>
         <param name="frame_id" value="$(arg namespace)/map"/>
-      </node>
+      </node> -->
 
     </group>
 
@@ -59,6 +63,30 @@
     <group ns="mavros/global_position">
       <node pkg="marine_tools" type="navsatfix_to_nmea" name="navsatfix_to_nmea">
         <remap from="input" to="raw/fix"/>
+      </node>
+      <node pkg="marine_tools" type="nmea_to_udp.py" name="gga_to_udp">
+        <param name="address" value="blaze"/>
+      </node>
+    </group>
+
+    <group ns="mavros/imu">
+      <node pkg="marine_tools" type="imu_to_hdt" name="imu_to_hdt">
+        <remap from="input" to="data"/>
+      </node>
+      <node pkg="marine_tools" type="nmea_to_udp.py" name="hdt_to_udp">
+        <param name="address" value="blaze"/>
+      </node>
+    </group>
+
+    <group ns="sensors/deltat">
+      <node pkg="imagenex_deltat" type="deltat.py" name="deltat">
+        <param name="frame_id" value="$(arg platform_name)/deltat"/>
+      </node>
+
+      <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+        <remap from="cloud_in" to="soundings"/>
+        <param name="resolution" value="0.25"/>
+        <param name="frame_id" value="$(arg namespace)/map"/>
       </node>
     </group>
 
