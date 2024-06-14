@@ -6,6 +6,7 @@
   <arg name="logDirectory" default="/dev/null"/>
   <arg name="urdf_model" default="$(find izzyboat_project11)/urdf/izzyboat.urdf"/>
   <arg name="fcu_url" default="/dev/ttyUSB0:57600"/> 
+  <arg name="gcs_url" default="udp://@192.168.12.8"/> 
 
   <include file="$(find echoboat_project11)/launch/echo.launch">
     <arg name="namespace" value="$(arg namespace)"/>
@@ -13,6 +14,7 @@
     <arg name="platform_package" value="$(arg platform_package)"/>
     <arg name="operator_host" value="$(arg operator_host)"/>
     <arg name="fcu_url" value="$(arg fcu_url)"/>
+    <arg name="gcs_url" value="$(arg gcs_url)"/>
   </include> 
 
   <group ns="$(arg namespace)">
@@ -41,8 +43,8 @@
       <node pkg="topic_tools" type="throttle" name="throttle_forward" args="messages camera_forward/image_raw/compressed .5"/> -->
 
 
-      <include file="$(find depthai_ros_driver)/launch/pointcloud.launch">
-      </include>
+      <!-- <include file="$(find depthai_ros_driver)/launch/pointcloud.launch">
+      </include> -->
 
       <node pkg="topic_tools" type="throttle" name="throttle_oak" args="messages oak/rgb/image_raw/compressed .5"/>
 
