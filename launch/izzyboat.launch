@@ -67,14 +67,29 @@
       <node pkg="marine_tools" type="nmea_to_udp.py" name="gga_to_udp">
         <param name="address" value="blaze"/>
       </node>
+      <node pkg="marine_tools" type="nmea_to_udp.py" name="gga_to_udp_4041">
+        <param name="address" value="blaze"/>
+        <param name="port" value="4041"/>
+      </node>
     </group>
 
     <group ns="mavros/imu">
       <node pkg="marine_tools" type="imu_to_hdt" name="imu_to_hdt">
         <remap from="input" to="data"/>
       </node>
+      <node pkg="marine_tools" type="imu_to_pashr" name="imu_to_pashr">
+        <remap from="input" to="data"/>
+      </node>
       <node pkg="marine_tools" type="nmea_to_udp.py" name="hdt_to_udp">
         <param name="address" value="blaze"/>
+      </node>
+      <node pkg="marine_tools" type="nmea_to_udp.py" name="hdt_to_udp_4041">
+        <param name="address" value="blaze"/>
+        <param name="port" value="4041"/>
+      </node>
+      <node pkg="marine_tools" type="nmea_to_udp.py" name="hdt_to_udp_4042">
+        <param name="address" value="blaze"/>
+        <param name="port" value="4042"/>
       </node>
     </group>
 
