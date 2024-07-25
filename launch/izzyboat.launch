@@ -7,6 +7,7 @@
   <arg name="urdf_model" default="$(find izzyboat_project11)/urdf/izzyboat.urdf"/>
   <arg name="fcu_url" default="/dev/ttyUSB0:57600"/> 
   <arg name="gcs_url" default="udp://@192.168.12.8"/> 
+  <!-- <arg name="gcs_url" default="udp://@192.168.13.142"/> -->
 
   <include file="$(find echoboat_project11)/launch/echo.launch">
     <arg name="namespace" value="$(arg namespace)"/>
@@ -43,8 +44,8 @@
       <node pkg="topic_tools" type="throttle" name="throttle_forward" args="messages camera_forward/image_raw/compressed .5"/> -->
 
 
-      <!-- <include file="$(find depthai_ros_driver)/launch/pointcloud.launch">
-      </include> -->
+      <include file="$(find depthai_ros_driver)/launch/pointcloud.launch">
+      </include>
 
       <node pkg="topic_tools" type="throttle" name="throttle_oak" args="messages oak/rgb/image_raw/compressed .5"/>
 
@@ -69,14 +70,29 @@
       <node pkg="marine_tools" type="nmea_to_udp.py" name="gga_to_udp">
         <param name="address" value="blaze"/>
       </node>
+      <node pkg="marine_tools" type="nmea_to_udp.py" name="gga_to_udp_4041">
+        <param name="address" value="blaze"/>
+        <param name="port" value="4041"/>
+      </node>
     </group>
 
     <group ns="mavros/imu">
       <node pkg="marine_tools" type="imu_to_hdt" name="imu_to_hdt">
         <remap from="input" to="data"/>
       </node>
+      <node pkg="marine_tools" type="imu_to_pashr" name="imu_to_pashr">
+        <remap from="input" to="data"/>
+      </node>
       <node pkg="marine_tools" type="nmea_to_udp.py" name="hdt_to_udp">
         <param name="address" value="blaze"/>
+      </node>
+      <node pkg="marine_tools" type="nmea_to_udp.py" name="hdt_to_udp_4041">
+        <param name="address" value="blaze"/>
+        <param name="port" value="4041"/>
+      </node>
+      <node pkg="marine_tools" type="nmea_to_udp.py" name="hdt_to_udp_4042">
+        <param name="address" value="blaze"/>
+        <param name="port" value="4042"/>
       </node>
     </group>
 

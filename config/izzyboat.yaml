@@ -12,7 +12,7 @@ udp_bridge/remotes:
           oak_rgb: {source: sensors/cameras/oak/rgb/image_raw/compressed, period: 0.25}
           oak_rgb_info: {source: sensors/cameras/oak/rgb/camera_info}
           deltat: {source: sensors/deltat/soundings}
-          deltat_octomap: {source: /izzy/sensors/deltat/occupied_cells_vis_array}
+          deltat_octomap: {source: /izzy/sensors/deltat/occupied_cells_vis_array, period: 2.0}
           battery: {source: /izzy/mavros/battery}
           control_cmd_vel: {source: /izzy/project11/control/cmd_vel}
           cross_track_error: {source: /izzy/navigator/cross_track_error}
