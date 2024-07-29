@@ -9,6 +9,7 @@ udp_bridge/remotes:
     connections:
       default:
         topics:
+          front_camera: {source: sensors/cameras/camera_forward/image_raw/compressed_throttle}
           oak_rgb: {source: sensors/cameras/oak/rgb/image_raw/compressed, period: 0.25}
           oak_rgb_info: {source: sensors/cameras/oak/rgb/camera_info}
           deltat: {source: sensors/deltat/soundings}

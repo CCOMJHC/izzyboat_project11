@@ -8,5 +8,6 @@
     <arg name="mountpoint" value="RTCM3_MASA"/>
     <arg name="username" value="izzyboat"/>
     <arg name="password" value="izzyboat"/>
+    <arg name="rtcm_message_package" value="mavros_msgs"/>
   </include>
 </launch>

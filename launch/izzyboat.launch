@@ -26,7 +26,7 @@
 
     <group ns="sensors/cameras/">
 
-      <!-- <node pkg="usb_cam" type="usb_cam_node" name="camera_forward"> 
+      <node pkg="usb_cam" type="usb_cam_node" name="camera_forward"> 
         <param name="camera_name" value="camera_forward" />
         <param name="framerate" value="30" />
         <param name="image_width" value="1920"/>
@@ -35,13 +35,13 @@
         <param name="camera_info_url" value="file://$(find izzyboat_project11)/config/camera_forward.yaml"/>
       </node>
 
-      <node pkg="opencv_dnn" type="opencv_dnn_node" name="yolov8">
+      <!-- <node pkg="opencv_dnn" type="opencv_dnn_node" name="yolov8">
         <param name="model" value="$(find opencv_dnn)/config/jenna.onnx"/>
         <param name="detections_parser" value="opencv_dnn::YOLOv5Parser"/>
         <remap from="image" to="camera_forward/image_raw"/>
-      </node>
+      </node> -->
 
-      <node pkg="topic_tools" type="throttle" name="throttle_forward" args="messages camera_forward/image_raw/compressed .5"/> -->
+      <node pkg="topic_tools" type="throttle" name="throttle_forward" args="messages camera_forward/image_raw/compressed .5"/>
 
 
       <include file="$(find depthai_ros_driver)/launch/pointcloud.launch">
@@ -109,6 +109,7 @@
     </group>
 
 
+
     <node pkg="rosbag" type="record" name="logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/izzyboat --split --duration=15m --repeat-latched --lz4 -a -x  &quot;(.*)image(.*)|(.*)lidar(.*)|(.*)points(.*)&quot;
 "   />
 
@@ -122,5 +123,9 @@
 
   </group>
 
+  <remap from="/$(arg namespace)/sensors/ntrip/rtcm" to="/$(arg namespace)/mavros/gps_rtk/send_rtcm"/>
+  <include file="$(find izzyboat_project11)/launch/ntrip.launch">
+    <arg name="namespace" value="$(arg namespace)"/>
+  </include>
 
 </launch>
