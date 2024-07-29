@@ -9,6 +9,9 @@
   <arg name="gcs_url" default="udp://@192.168.12.8"/> 
   <!-- <arg name="gcs_url" default="udp://@192.168.13.142"/> -->
 
+
+  <remap from="/$(arg namespace)/sensors/mbes/soundings" to="/$(arg namespace)/sensors/deltat/soundings"/>
+
   <include file="$(find echoboat_project11)/launch/echo.launch">
     <arg name="namespace" value="$(arg namespace)"/>
     <arg name="platform_name" value="$(arg platform_name)"/>
